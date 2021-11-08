@@ -1,0 +1,8 @@
+---
+- name: install k3d
+  hosts: k8s
+  remote_user: user
+  become: yes
+  become_method: sudo
+  roles:
+    - k3d/install

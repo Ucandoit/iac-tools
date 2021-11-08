@@ -1,0 +1,20 @@
+- name: create directory if not exist
+  file:
+    path: '{{ k3d_folder }}'
+    state: directory
+    owner: user
+    group: user
+    mode: 0775
+
+- name: Add nginx ingress helm chart
+  template: 
+    src: templates/helm-ingress-nginx.yaml
+    dest: '{{ k3d_folder }}/helm-ingress-nginx.yaml'
+
+- name: Create k3d cluster
+  shell: k3d cluster create {{ k3d_cluster }} --servers 1 --agents 3 \
+    --k3s-server-arg '--tls-san=91.121.85.104' \
+    --k3s-server-arg '--no-deploy=traefik' \
+    --port 8000:80@loadbalancer
+    --volume {{ k3d_folder }}/helm-ingress-nginx.yaml:/var/lib/rancher/k3s/server/manifests/helm-ingress-nginx.yaml
+    --volume {{ mount_volume }}:{{ k3d_volume }}@all --wait

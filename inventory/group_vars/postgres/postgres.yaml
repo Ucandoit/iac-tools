@@ -1,0 +1,4 @@
+postgres_data: /var/lib/postgresql/data/pgdata
+posrgres_volume: /var/lib/postgresql/data
+mount_volume: /opt/pgvolume
+postgres_version: 12

@@ -1,0 +1,8 @@
+- name: Create postgres
+  shell: docker run -d \
+    --name postgres \
+    -e POSTGRES_PASSWORD={{ postgres_password }} \
+    -e PGDATA={{ postgres_data }} \
+    -v {{ mount_volume }}:{{ posrgres_volume }} \
+    -p 5432:5432 \
+    postgres:{{ postgres_version }}

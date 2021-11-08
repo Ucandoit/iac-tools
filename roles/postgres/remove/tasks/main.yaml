@@ -1,0 +1,4 @@
+- name: Stop postgres
+  shell: docker stop postgres
+- name: Delete container
+  shell: docker container rm postgres
