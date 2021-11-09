@@ -17,4 +17,4 @@
     --k3s-server-arg '--no-deploy=traefik' \
     --port 8000:80@loadbalancer
     --volume {{ k3d_folder }}/helm-ingress-nginx.yaml:/var/lib/rancher/k3s/server/manifests/helm-ingress-nginx.yaml
-    --volume {{ mount_volume }}:{{ k3d_volume }}@all --wait
+    --volume {{ k3d_mount_volume }}:{{ k3d_volume }}@all --wait
